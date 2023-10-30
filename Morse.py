@@ -7,6 +7,8 @@ parser = argparse.ArgumentParser(description='This is a Test',add_help=False)
 
 parser.add_argument('-m', '--mores', help='this will convert text to morse code')
 parser.add_argument('-b', '--binary', help='this will convert text to binary morse code')
+parser.add_argument('-db', '--DecodeBinary', help='this will convert binary morse to text')
+parser.add_argument('-dm', '--DecodMorse', help='this will convert morse to text')
 parser.add_argument('--help', '-h', action='help', help='-m for morese code \n-b for binary code')
 
 # Parse the command-line arguments
@@ -15,7 +17,8 @@ args = parser.parse_args()
 # Access the values of the arguments
 MoresOption = args.mores
 BinaryOption = args.binary
-
+DecodeBinary = args.DecodeBinary
+DecodMorse = args.DecodMorse
 
 morse_code = {
     'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....',
@@ -51,10 +54,27 @@ def TextToBinarry(text):
     return morse.strip()
 
 
+def DecodeBinaryMorese(MorseBinary):
+    text = ""
+    for i in MorseBinary.split():
+        text += list(MoresCodeBinary.keys())[list(MoresCodeBinary.values()).index(i)]
+    return text
+
+def DecodTextMorese(TextMorse):
+    text = ""
+    for i in TextMorse.split():
+        text += list(morse_code.keys())[list(morse_code.values()).index(i)]
+    return text
+
+
 if __name__ == "__main__":
     if BinaryOption:
         print(TextToBinarry(BinaryOption))
     elif MoresOption:
         print(text_to_morse(MoresOption))
+    elif DecodeBinary:
+       print(DecodeBinaryMorese(DecodeBinary))
+    elif DecodMorse:
+        print(DecodTextMorese(DecodMorse))
     else:
         print("seek help -h --help")
