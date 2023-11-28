@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # all the  pachages needed in the script
-packgeNeeded=("dmenu" "graphicsmagick-imagemagick-compat" "xclip" "espeak")
+packgeNeeded=("dmenu" "graphicsmagick-imagemagick-compat" "imagemagick" "xclip" "espeak")
 
 
 # check if all used packages are installed
