@@ -22,7 +22,7 @@ choice=$(echo -e "Copy\nCrop\nFull" | dmenu -i -p "Chosse")
 
 case $choice in
   Copy)
-	import png:- | xclip -selection clipboard -t image/png
+	import -quality 95 png:- | xclip -selection clipboard -t image/png
     ;;
   Crop)
 	gnome-screenshot -a && espeak Area
