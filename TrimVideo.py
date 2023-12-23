@@ -1,9 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 try:
 	from uuid import uuid4
 	from sys import argv
 	import subprocess
+	import argparse
 except:
 	print("Install these: [sys , subprocess , uuid] , ffmpeg ")
 
@@ -149,15 +150,21 @@ class Video():
 		return cleaningResult
 
 if __name__ == '__main__':
-	help = "\n-i [ input File Name ]\n-start [ Houar:Minute:Second ]\n-end [ Houar:Minute:Second ]\n-o [ output File Name ]"
-	if len(argv) == 1 :
-		print(help)
-	else:
-		#videoName, start ,end = argv[1], argv[2], argv[3]
-		videoName = argv[1]
-		BadParts = [["00:04:00","00:06:00"],["00:15:00","00:18:00"]]
-		newVideo = Video(inputVideoName=videoName)
-		result = newVideo.deletePart(ListOfBadParts=BadParts)
-		print("Deleting Temp Files")
-		newVideo.clean()
-		# we will edit this to make a nudity algoritm detections
+	parser = argparse.ArgumentParser(description='Trim this video script',add_help=False)
+	parser.add_argument('-i', '--InputFile', help='path to Video')
+	parser.add_argument('-start', '--start', help='[ Houar:Minute:Second ]')
+	parser.add_argument('-end', '--end', help='[ Houar:Minute:Second ]')
+
+	parser.add_argument('--help', '-h', action='help', help='\n-i [ input File Name ]\n-start [ Houar:Minute:Second ]\n-end [ Houar:Minute:Second ]\n-o [ output File Name ]')
+	args = parser.parse_args()
+
+    # Access the values of the arguments
+	VideoPath = args.InputFile
+	start = args.start
+	end = args.end 
+
+	newVideo = Video(inputVideoName=VideoPath, startCutting=start, endCutting=end)
+	result = newVideo.trimVideo()
+	print("Deleting Temp Files")
+	newVideo.clean()
+	# we will edit this to make a nudity algoritm detections
