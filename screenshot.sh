@@ -22,15 +22,15 @@ choice=$(echo -e "Copy\nCrop\nFull" | dmenu -i -p "Chosse")
 
 case $choice in
   Copy)
-	import -quality 95 png:- | xclip -selection clipboard -t image/png
+	import -quality 95 png:- | xclip -selection clipboard -t image/png && (sayit.py 'Area copied' || espeak Area )
     ;;
   Crop)
-	gnome-screenshot -a && espeak Area
+	gnome-screenshot -a && (sayit.py 'Area croped' || espeak Area )
     ;;
   Full)
-	gnome-screenshot && espeak Full
+	gnome-screenshot && (sayit.py 'Full screenshot' || espeak Area )
     ;;
   *)
-	espeak "Error"
+	sayit.py 'error' || espeak "Error"
     ;;
 esac
