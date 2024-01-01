@@ -26,7 +26,7 @@ case $choice in
 		shutdown now
     	;;
   Lock)
-		espeak "HOPE " && i3lock -c "#000033"
+		sayit.py 'screen locked' || espeak 'screen locked' && i3lock -c "#000033"
 		;;
   Sleep)
 		i3lock -c "#000033" && systemctl suspend
@@ -38,6 +38,6 @@ case $choice in
 		i3-msg exit
 		;;
   *)
-		espeak "Error "
+		sayit.py 'error' || espeak 'error'
     	;;
 esac

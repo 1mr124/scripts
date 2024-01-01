@@ -11,7 +11,7 @@ case $selectedAi in
 	exec google-chrome-stable --profile-directory="Default" --app=https://bard.google.com/chat &
     ;;
   *)
-        espeak "Error"
+        sayit.py 'error' || espeak 'error'
     ;;
 esac
 
