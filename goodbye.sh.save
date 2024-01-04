@@ -23,7 +23,7 @@ choice=$(echo -e "Shutdown\nLock\nSleep\nReboot\nQuit" | dmenu -i -p "Chosse")
 
 case $choice in
   Shutdown)
-		sayit.py 'system is going to shutdown' || espeak 'system is going to shutdown' && shutdown now
+		sayit.py 'sys'shutdown now
     	;;
   Lock)
 		sayit.py 'screen locked' || espeak 'screen locked' && i3lock -c "#000033"
