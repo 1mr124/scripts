@@ -6,7 +6,7 @@ from sys import argv
 
 '''
 install these 
-pip instll gtts
+pip install gtts
 sudo apt-get install sox libsox-fmt-mp3
 
 '''
