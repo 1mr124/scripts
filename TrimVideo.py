@@ -165,6 +165,7 @@ if __name__ == '__main__':
 
 	newVideo = Video(inputVideoName=VideoPath, startCutting=start, endCutting=end)
 	result = newVideo.trimVideo()
+	print(result)
 	print("Deleting Temp Files")
 	newVideo.clean()
 	# we will edit this to make a nudity algoritm detections

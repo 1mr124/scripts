@@ -13,6 +13,7 @@ while true; do
     fi
 
     {
+	url=$(echo $url | tr -d "'")
 	feh "$url" >/dev/null 2>&1 &
     } || { 
         echo 'error'
