@@ -19,7 +19,7 @@ function installAllPackages(){
 #dpkg -s ${packgeNeeded[@]} > /dev/null 2>&1 || installAllPackages 
 
 
-choice=$(echo -e "Shutdown\nLock\nSleep\nReboot\nQuit" | dmenu -i -p "Chosse")
+choice=$(echo -e "Shutdown\nLock\nHibernate\nSleep\nReboot\nQuit" | dmenu -i -p "Chosse")
 
 case $choice in
   Shutdown)
@@ -28,6 +28,9 @@ case $choice in
   Lock)
 		sayit.py 'screen locked' || espeak 'screen locked' && i3lock -c "#000033"
 		;;
+  Hibernate)
+  		sayit.py 'system is going to hibernate' || espeak 'system is going to hibernate' && systemctl hibernate
+                ;;
   Sleep)
 		i3lock -c "#000033" && systemctl suspend
    		;;
