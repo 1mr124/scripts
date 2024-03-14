@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-
+#!/usr/bin/env zsh
 
 # all the  pachages needed in the script
 packgeNeeded=("dmenu" "i3" "i3lock" "espeak")
@@ -19,28 +18,29 @@ function installAllPackages(){
 #dpkg -s ${packgeNeeded[@]} > /dev/null 2>&1 || installAllPackages 
 
 
-choice=$(echo -e "Shutdown\nLock\nHibernate\nSleep\nReboot\nQuit" | dmenu -i -p "Chosse")
+choice=$(echo -e "Hibernate\nSleep\nLock\nShutdown\nReboot\nQuit" | dmenu -i -p "Chosse")
 
 case $choice in
-  Shutdown)
-		sayit.py 'system is going to shutdown' || espeak 'system is going to shutdown' && shutdown now
-    	;;
-  Lock)
-		sayit.py 'screen locked' || espeak 'screen locked' && i3lock -c "#000033"
-		;;
-  Hibernate)
-  		sayit.py 'system is going to hibernate' || espeak 'system is going to hibernate' && systemctl hibernate
-                ;;
-  Sleep)
-		i3lock -c "#000033" && systemctl suspend
-   		;;
-  Reboot)
-		reboot
-  		;;
-  Quit)
-		i3-msg exit
-		;;
-  *)
-		sayit.py 'error' || espeak 'error'
-    	;;
+	Shutdown)
+			/home/mr124/scripts/sayit.py 'system is going to shutdown' || espeak 'system is going to shutdown' && shutdown now
+			;;
+	Hibernate)
+			/home/mr124/scripts/sayit.py 'system is going to hibernate' || espeak 'system is going to hibernate' && systemctl hibernate
+			;;
+	Sleep)
+			i3lock -c "#000033" && systemctl suspend
+			;;
+	Lock)
+			/home/mr124/scripts/sayit.py 'screen locked' || espeak 'screen locked' && i3lock -c "#000033"
+			;;
+	
+	Reboot)
+			reboot
+			;;
+	Quit)
+			i3-msg exit
+			;;
+	*)
+			/home/mr124/scripts/sayit.py 'error' || espeak 'error'
+			;;
 esac

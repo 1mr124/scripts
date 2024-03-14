@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Directory where your PDF books are stored
-booksDirectory="/home/mr124/Documents/currentReading"
+booksDirectory="/home/mr124/Documents/Pdf/CurrentlyReading"
 
 # Use find to locate PDF files in subfolders
 BooksNames=$(find "$booksDirectory" -iname '*.pdf' | rev | cut -d '/' -f 1 | rev | cut -d '.' -f 1)
