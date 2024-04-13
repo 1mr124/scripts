@@ -18,6 +18,8 @@ parser = argparse.ArgumentParser(description='This is a Test',add_help=False)
 
 parser.add_argument('-c', '--continuee', help='this will continuse sending tweets')
 parser.add_argument('-s', '--send', help='this will send single tweet')
+parser.add_argument('-p', '--passCode', help='The password for authentication.')
+
 parser.add_argument('--help', '-h', action='help', help='-m for morese code \n-b for binary code')
 
 # Parse the command-line arguments
@@ -26,6 +28,8 @@ args = parser.parse_args()
 # Access the values of the arguments
 continueeMode = args.continuee
 send = args.send
+passcode = args.passCode
+
 
 
 def generate_key(password):
@@ -77,11 +81,8 @@ def continueeSendingTweet(client):
 
 
 
-if __name__ == "__main__":
-    # Set up your Twitter API credentials
-    filename = "/home/mr124/Documents/.TwitterApi.bin"
-    password = getpass.getpass("Enter Your Passkey: ")
-    PassKey = generate_key(password)
+def main(passwoard):
+    PassKey = generate_key(passwoard)
     loadedData = loadData(filename)
     data = decrypt_data(loadedData,PassKey)
     data = json.loads(data)
@@ -93,3 +94,14 @@ if __name__ == "__main__":
             continueeSendingTweet(client)         
     else:
         print("error on data")
+
+if __name__ == "__main__":
+    filename = "/home/mr124/Documents/.TwitterApi.bin"
+    if passcode:
+        getpass.getpass = lambda prompt='': passcode
+        print(passcode)
+        main(passcode)
+    else:
+        password = getpass.getpass("Enter Your Passkey: ")
+        main(password)
+        
