@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/home/mr124/PyEnv/Tweet/bin/python3
 
 import tweepy
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
@@ -96,7 +96,7 @@ def main(passwoard):
         print("error on data")
 
 if __name__ == "__main__":
-    filename = "/home/mr124/Documents/.TwitterApi.bin"
+    filename = "/home/mr124/Documents/.NewTwitter.bin"
     if passcode:
         getpass.getpass = lambda prompt='': passcode
         print(passcode)

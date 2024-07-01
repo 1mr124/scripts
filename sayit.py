@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
-
+#!/home/mr124/PyEnv/stx/bin/python3
 from gtts import gTTS
 import subprocess
 from sys import argv
+
 
 '''
 install these 
@@ -18,7 +18,6 @@ def textToSpeech(text, language='en', speed=False, outputFile='/tmp/output.mp3')
 
 def playSound(filePath):
     command = f'play {filePath} tempo 1.4 2>&1 > /dev/null'
-    print(command)
     result = subprocess.check_output(command, shell=True)
 
 if __name__ == "__main__":

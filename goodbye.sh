@@ -22,20 +22,20 @@ choice=$(echo -e "Hibernate\nSleep\nLock\nShutdown\nReboot\nQuit" | dmenu -i -p 
 
 case $choice in
 	Shutdown)
-			/home/mr124/scripts/sayit.py 'system is going to shutdown' || espeak 'system is going to shutdown' && shutdown now
+			doas shutdown -h now
 			;;
 	Hibernate)
-			/home/mr124/scripts/sayit.py 'system is going to hibernate' || espeak 'system is going to hibernate' && systemctl hibernate
+			doas zzz -Z
 			;;
 	Sleep)
-			i3lock -c "#000033" && systemctl suspend
+			doas zzz -z
 			;;
 	Lock)
-			/home/mr124/scripts/sayit.py 'screen locked' || espeak 'screen locked' && i3lock -c "#000033"
+			slock
 			;;
 	
 	Reboot)
-			reboot
+			doas reboot
 			;;
 	Quit)
 			i3-msg exit

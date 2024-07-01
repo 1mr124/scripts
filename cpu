@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Define threshold for urgent CPU usage
+URGENT_VALUE=90
+
+# Read the first line of /proc/stat
+read -r cpu user nice system idle iowait irq softirq steal guest guest_nice < /proc/stat
+
+# Calculate the total and idle time
+total=$((user + nice + system + idle + iowait + irq + softirq + steal))
+total_idle=$((idle + iowait))
+
+# Initialize usage variable
+usage=0
+
+# Retrieve previous total and idle time if exists
+if [ -f /tmp/.cpu ]; then
+  read -r prev_total prev_idle < /tmp/.cpu
+else
+  prev_total=0
+  prev_idle=0
+fi
+
+# Save current total and idle time for next run
+echo "$total $total_idle" > /tmp/.cpu
+
+# Calculate CPU usage if previous values are available and valid
+if [ "$prev_total" -ne 0 ] && [ "$prev_idle" -ne 0 ]; then
+  total_diff=$((total - prev_total))
+  idle_diff=$((total_idle - prev_idle))
+  if [ "$total_diff" -gt 0 ]; then
+    usage=$((100 * (total_diff - idle_diff) / total_diff))
+  fi
+fi
+
+# Output the CPU usage or a placeholder if it's not calculable
+if [ "$usage" -gt 0 ]; then
+  echo "$usage%"
+else
+  echo "0"
+fi
+
+# Check for urgent CPU usage
+if [ "$usage" -ge "$URGENT_VALUE" ]; then
+  exit 33
+else
+  exit 0
+fi
