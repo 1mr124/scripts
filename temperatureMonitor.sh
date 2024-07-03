@@ -1,12 +1,11 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Get CPU temperature
-GPU_TEMP=$(sensors | grep -i 'edge:' | awk '{print $2}' | tr -d '+°C')
+GPU_TEMP=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
 
 
 # Get GPU temperature
-CPU_TEMP=$(sensors | grep -i 'temp1:' | awk '{print substr($2, 1, length($2)-2)}' | tr -d '+' | paste -sd ',' -
-)
+CPU_TEMP=$(sensors | grep 'Core' | awk '{print int($3)}' | paste -sd ',')
 
 # Default values if not found
 #[ -z "$CPU_TEMP" ] && CPU_TEMP="N/A"
