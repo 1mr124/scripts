@@ -18,7 +18,7 @@ function installAllPackages(){
 #dpkg -s ${packgeNeeded[@]} > /dev/null 2>&1 || installAllPackages 
 
 
-choice=$(echo -e "Hibernate\nSleep\nLock\nShutdown\nReboot\nQuit" | dmenu -i -p "Chosse")
+choice=$(echo -e "Shutdown\nReboot\nHibernate\nSleep\nLock\nQuit" | dmenu -i -p "Chosse")
 
 case $choice in
 	Shutdown)
