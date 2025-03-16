@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-selectedAi=$(echo -e "twitter\ntweetDeck\nbrainLab\nspotify\nwhatsApp\nsoundCloud\nyouTubeStudio\nwarMap" | dmenu -p "Select an App:")
+selectedAi=$(echo -e "twitter\ntweetDeck\nbrainLab\nspotify\nwhatsApp\nsoundCloud\nyouTubeStudio\nwarMap\nslack" | dmenu -p "Select an App:")
 
 '''
 2-Temp
@@ -34,6 +34,9 @@ case $selectedAi in
     ;;
   spotify)
 	exec google-chrome-stable --profile-directory="Default" --app=https://open.spotify.com/ &
+    ;;
+  slack)
+        exec google-chrome-stable --profile-directory="Default" --app=https://app.slack.com/client/T07NVCKSQG1/C07N25XVCNB &
     ;;
   *)
         sayit.py 'error' || espeak 'error'
