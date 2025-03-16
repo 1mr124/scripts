@@ -43,3 +43,15 @@ case $choice in
         echo "Invalid choice. Exiting."
         ;;
 esac
+
+
+# # Function to clean up old sources for a package
+# cleanup_old_sources() {
+#     local package_name=$1
+#     cd /home/mr124/void-packages/hostdir/sources
+#     ls | grep "$package_name" | sort -V | head -n -1 | xargs rm -f
+# }
+
+# # In the update functions, after the package installation:
+# cleanup_old_sources "discord"
+# cleanup_old_sources "google-chrome"
